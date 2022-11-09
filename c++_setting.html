@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Xiat_C++</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="index.html" class="logo"><strong>Xiat</strong><span>프로그래밍정보사이트</span></a>
+					</header>
+
+				<!-- Main -->
+					<div id="title" class="a">
+						C++ 개발환경세팅가이드
+					</div>
+
+					<div id="main_detail">
+						<span id="detail_title">프로그램다운로드</span><br>1. <a href="http://www.codeblocks.org/downloads/binaries/"target="_blank">https://code.visualstudio.com/</a> 를 클릭해 최신버전 VScode를 설치한다.<br><img src="./images/c++_1.png"style="width:550px;height:340px;"><br>2. 다운받은 설치파일을 연다.<br><br>
+						<span id="detail_title">앱 내 세팅</span><br><br>(맥 vs코드에서는 컴파일러가 기본적으로 제공되지 않기 때문에 직접 설치해야 한다)<br>3. shift + cmd + X 를 눌러 익스텐션 검색창에 진입한 후 검색창에 C++을 입력해 맨 위에 있는 C/C++이라고 쓰여있는 C++ extention을 설치한다.<br><img src="./images/c++_2.png"style="width:550px;height:340px;"><br>(위의 단계를 완료했으면 Clang이라는 컴파일러 프론트엔드를 다운받아야 한다)<br>4.우선 Clang이 이미 설치되어 있는지 확인하기 위해 터미널을 실행해 $ clang –version을 입력하여 설치를 확인해준다.<br><img src="./images/c++_3.png"style="width:550px;height:340px;"><br>5. 만약, 설치되어 있지 않다면 $ xcode-select – install을 입력하	clang을 다운받는다.<br>6. C++ 프로젝트를 진행할 폴더를 생성한 후 vs코드로 돌아가 생성한 폴더에 새로운 파일을 생성하고 아래 코트를 복붙 + 저장한다 (파일명.cpp)<br>#include<stdio.h><br>Int main()<br>{<br>&nbsp;printf(“HelloWorld”);<br>&nbsp;return 0 ;<br>}<br>7. 이제 tasks.json	파일을 생성 후 빌드할 것이다. 우선 터미널에 들어가 Configure Default Build Task로 들어가 준다 C/C++ clang++ build active file을 선택해 준다 .<br>8.tasks.jason파일이 생성되면 아래 코드를 복붙한다.<br>"version": "2.0.0",<br>"tasks": [<br>&nbsp{<br>&nbsp&nbsp"type": "shell",<br>&nbsp&nbsp"label": "C bulid for clang",<br>&nbsp&nbsp"command": "clang",<br>&nbsp&nbsp"args": [<br>&nbsp&nbsp&nbsp"-g",<br>&nbsp&nbsp&nbsp"${file}",<br>&nbsp&nbsp&nbsp"-o",<br>&nbsp&nbsp&nbsp"${fileDirname}/${fileBasenameNoExtension}"<br>&nbsp&nbsp],<br>&nbsp&nbsp&nbsp"options": {<br>&nbsp&nbsp&nbsp"cwd": "${workspaceRoot}"<br>&nbsp&nbsp},<br>&nbsp&nbsp&nbsp"presentation": {<br>&nbsp&nbsp&nbsp"clear": true<br>&nbsp&nbsp},<br>&nbsp&nbsp&nbsp"group": {<br>&nbsp&nbsp&nbsp"kind": "build",<br>&nbsp&nbsp&nbsp"isDefault": true<br>&nbsp&nbsp},<br>&nbsp&nbsp"problemMatcher": []<br>&nbsp},<br>&nbsp{<br>&nbsp&nbsp"type": "shell",<br>&nbsp&nbsp"label": "C++ bulid for clang++",<br>&nbsp&nbsp"command": "clang++",<br>&nbsp&nbsp"args": [<br>&nbsp&nbsp&nbsp"-g",<br>&nbsp&nbsp&nbsp"${file}",<br>&nbsp&nbsp&nbsp"-o",<br>&nbsp&nbsp&nbsp"${fileDirname}/${fileBasenameNoExtension}"<br>&nbsp&nbsp],<br>&nbsp&nbsp"options": {<br>&nbsp&nbsp&nbsp"cwd": "${workspaceRoot}"<br>&nbsp&nbsp},<br>&nbsp&nbsp"presentation": {<br>&nbsp&nbsp&nbsp"clear": true<br>&nbsp&nbsp},<br>&nbsp&nbsp"group": {<br>&nbsp&nbsp&nbsp"kind": "build",<br>&nbsp&nbsp&nbsp"isDefault": true<br>&nbsp&nbsp},<br>&nbsp&nbsp"problemMatcher": []<br>&nbsp},<br>&nbsp{<br>&nbsp&nbsp&nbsp"type": "shell",<br>&nbsp&nbsp&nbsp"label": "execute",<br>&nbsp&nbsp&nbsp"command": "${fileDirname}/${fileBasenameNoExtension}",<br>&nbsp&nbsp&nbsp"group": "test",<br>&nbsp&nbsp&nbsp"presentation": {<br>&nbsp&nbsp&nbsp&nbsp"clear": true<br>&nbsp&nbsp&nbsp}<br>&nbsp&nbsp}<br>&nbsp]<br>}<br>7. tasks.jason파일을 cmd + shift + b 를 눌러 빌드한 후 마켓플레이스에서 codelldb 익스텐션을 설치한다 .<br>8. launch.json 파일을 생성한 후 아래 코드를 복붙한다 .<br>"version": "0.2.0",<br>"configurations": [<br>&nbsp{<br>&nbsp&nbsp"name": "clang++ - Build and debug active file",<br>&nbsp&nbsp"type": "lldb",<br>&nbsp&nbsp"request": "launch",<br>&nbsp&nbsp"program": "${fileDirname}/${fileBasenameNoExtension}",<br>&nbsp&nbsp"args": [],<br>&nbsp&nbsp"stopAtEntry": true,<br>&nbsp&nbsp"cwd": "${workspaceFolder}",<br>&nbsp&nbsp"environment": [],<br>&nbsp&nbsp"externalConsole": false,<br>&nbsp&nbsp"MIMode": "lldb",<br>&nbsp"preLaunchTask":"clang++ build active file"<br>}<br>
+					</div>
+			</div>
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner" style="margin-top : 0px;margin-left:0px;padding-top:65px;">
+					<ul class="copyright" style="padding-left:100px;">
+						<li>&copy; 2022. Xiat All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a> / xiatdeveloper@gmail.com</li>
+					</ul>
+				</div>
+			</footer>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -35,7 +35,6 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-
 ol, ul {
 	list-style: none;
 }
@@ -3719,7 +3718,6 @@ input, select, textarea {
 			#contact > .inner {
 				display: block;
 			}
-
 				#contact > .inner > :nth-child(2n - 1) {
 					padding: 4em 0 2em 0 ;
 					border-right: 0;
