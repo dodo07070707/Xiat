@@ -1,7 +1,8 @@
-		이 페이지는 2022선린SW영재원 산출물 발표를 위해 만들어졌습니다.
-		분명 팀원은 네명인데 웹개발할줄 아는 사람이 한명이라 html/css 다하고 있는 본인은 김도윤입니다.
+## 2022선린SW영재원 산출물 발표<br/>
 
-		Forty by HTML5 UP
+#### XIAT 프로그래밍 정보 사이트<br/>
+
+Forty by HTML5 UP
 html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
